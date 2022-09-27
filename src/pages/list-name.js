@@ -120,7 +120,7 @@ export default function ListNamePage(){
 
                         <Typography variant="h8" align='center'>
 
-                        <AcakNama listItems={listName} />
+                        <AcakNama listItems={listName} align='center'/>
                         </Typography>
                     </Stack>
                     

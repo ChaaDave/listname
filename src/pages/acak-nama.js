@@ -16,7 +16,7 @@ export function AcakNama(props){
         const randomId = getRndInteger(0, total)
         return listItems[randomId].name
     } 
-    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !=index)
+    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !==index)
 
     function randomItem(){
         setIsLoading(true)
@@ -42,7 +42,7 @@ export function AcakNama(props){
 
     return (
         <div>
-            <Stack direction={'row'} alignItems='center' spacing={2}>
+            <Stack direction={'column'} alignItems='center' spacing={2} justifyContent='center'>
                 <Button 
                 variant='outlined' 
                 size='small' 
@@ -52,8 +52,6 @@ export function AcakNama(props){
                 >
                     {isLoading ? 'Loading ... ' : 'acak'}
                 </Button>
-            </Stack>
-            <Stack>
                 <div>
                     Presenter 1 : {selectedItem[0]}
                 </div>
