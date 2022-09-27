@@ -66,7 +66,7 @@ export default function ListNamePage(){
             <CardContent>
                 <Stack spacing={3}>
                     <Typography variant="h4" align='center'>
-                        List Nama
+                        Daftar Nama
                     </Typography>
                     <Stack direction='row' spacing={3}>
                         <TextField 
@@ -113,10 +113,17 @@ export default function ListNamePage(){
                         ))
                     }
                     </List>
-                    
-                    Total nama : {listName.length}
+                    <Stack>
+                        <Typography variant="h6" align='center'>
+                        Total Nama : {listName.length}
+                        </Typography>
 
-                    <AcakNama listItems={listName} />
+                        <Typography variant="h8" align='center'>
+
+                        <AcakNama listItems={listName} />
+                        </Typography>
+                    </Stack>
+                    
                 </Stack>
             </CardContent>
         </Card>

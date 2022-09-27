@@ -43,6 +43,7 @@ export function AcakNama(props){
     return (
         <div>
             <Stack direction={'row'} alignItems='center' spacing={2}>
+                <typography align='center'>
                 <Button 
                 variant='outlined' 
                 size='small' 
@@ -52,6 +53,7 @@ export function AcakNama(props){
                 >
                     {isLoading ? 'Loading ... ' : 'acak'}
                 </Button>
+                </typography>
             </Stack>
             <Stack>
                 <div>
