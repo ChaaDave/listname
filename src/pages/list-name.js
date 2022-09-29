@@ -5,13 +5,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from "react";
 //import { link } from "react-router-dom";
 import { AcakNama } from "./acak-nama";
+
 export default function ListNamePage(){
-    const [listName,  setListName] = useState([
-        {name: 'John'},
-        {name: 'Charlos'},
-        {name: 'Faerero'},
-        {name: 'Dave'}
-    ])
+    const [listName,  setListName] = useState(JSON.parse(localStorage.getItem('listName')))
+    useEffect(() => {
+        localStorage.setItem('listName', JSON.stringify(listName))
+         }, [listName])
 
     const [inputName, setInputName] = useState('')
     const [isModeEdit, setIsModeEdit] = useState(false)
