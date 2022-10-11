@@ -6,7 +6,7 @@ import PersistentDrawerRight from './pages/navbar';
 function App() {
   return (
     <div style={{ 
-      backgroundColor: "#000000"
+      backgroundColor: "#808080"
     }}>
       <PersistentDrawerRight />,
       <List />,
