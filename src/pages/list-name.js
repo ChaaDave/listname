@@ -56,7 +56,7 @@ export default function ListNamePage() {
     return (
         <div >
             <Container sx={{ my: 18 }} align="center" >
-                <Card sx={{ maxWidth: 300 }} >
+                <Card sx={{ maxWidth: 700 }} >
                     <CardContent >
                         <div><h3>List Nama</h3></div> <br />
 
