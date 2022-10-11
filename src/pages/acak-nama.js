@@ -46,7 +46,7 @@ export default function AcakNama(props) {
     }
 
     return (
-        <Container sx={{ my: 28 }} align="center">
+        <Container sx={{ my: 40 }} align="center">
             <Card sx={{ maxWidth: 500 }}>
                 <div><h3>Acak Nama</h3></div>
                 <Stack>
