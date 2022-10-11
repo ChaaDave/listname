@@ -52,6 +52,15 @@ export default function ListNamePage() {
             setListname(prev)
         }
     }
+   function actionListName(){
+        isModeEdit ? editListname() : addListName()
+    }
+
+    function onKeydownForm(e) {
+        if (e.key === 'Enter'){
+            actionListName()
+        }
+    }
 
     return (
         <div >
