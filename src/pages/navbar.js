@@ -33,7 +33,7 @@ export default function PersistentDrawerRight() {
                         alt="sahaware"
                         height={30}
                         marginRight="100"
-                        src="sahaware.png"
+                        src="https://media-exp1.licdn.com/dms/image/C510BAQF24-0MYzcT0A/company-logo_200_200/0/1533807795080?e=1673481600&v=beta&t=Jv87J1wMyteXBt1vqWYfdm5D1kMhhJ6f-E6ZrqVfzyU"
                         sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     </Toolbar>
       </AppBar>
