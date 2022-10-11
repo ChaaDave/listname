@@ -46,7 +46,7 @@ export default function ListNamePage() {
     }
     function deleteListname(index) {
         console.log(index)
-        if (window.confirm("Yakin hapus data?") === true) {
+        if (window.confirm("Anda yakin ingin menghapus data?") === true) {
             const prev = [...listName]
             prev.splice(index, 1)
             setListname(prev)
