@@ -17,7 +17,7 @@ export function AcakNama(props){
         console.log(listItems)
         const total = listItems.length
         const randomId = getRndInteger(0, total)
-        return listItems[randomId].Name
+        return listItems[randomId].name
     } 
     let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !==index)
 
@@ -28,7 +28,7 @@ export function AcakNama(props){
                 getRandomName(),
                 getRandomName(),
                 getRandomName()
-            
+            ]
 
             const dup = findDuplicates(listRandomNama)
             
