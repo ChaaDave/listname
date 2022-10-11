@@ -1,131 +1,116 @@
-import {  Button, Card, CardContent, IconButton, List, ListItem, ListItemText, TextField, Typography } from "@mui/material";
-import { Container, Stack } from "@mui/system";
+import { Button, Card, CardContent, IconButton, List, ListItem, ListItemText, Stack, TextField } from "@mui/material";
+import { Container } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from "react";
-//import { link } from "react-router-dom";
-import { AcakNama } from "./acak-nama";
+import React from 'react';
+import AcakNama from "./acak-nama";
 
-export default function ListNamePage(){
-    const [listName,  setListName] = useState(JSON.parse(localStorage.getItem('listName')))
-    useEffect(() => {
-        localStorage.setItem('listName', JSON.stringify(listName))
-         }, [listName])
+
+
+export default function ListNamePage() {
+   const [listName, setListname] = useState(JSON.parse(localStorage.getItem('listName'))  || [])
+   
+   useEffect(() => {
+       localStorage.setItem('listName' , JSON.stringify(listName))    
+   }, [listName])
 
     const [inputName, setInputName] = useState('')
     const [isModeEdit, setIsModeEdit] = useState(false)
     const [editIndex, setEditIndex] = useState()
-    
-    function addListName(){
+  
+
+    function addListName() {
         const prev = [...listName]
-        prev.push({
+        if (!inputName) {
+            return alert("Masukan nama terlebih dahulu");
+        }
+        prev.unshift({
             name: inputName
         })
-        setListName(prev)
+        setListname(prev)
         setInputName('')
     }
 
-    function editListname(){
+    function editListname() {
         const prev = [...listName]
         prev[editIndex].name = inputName
-        setListName(prev)
+        setListname(prev)
         setInputName('')
         setIsModeEdit(false)
     }
-
-    function setModeEditFor(index){
+    function setModeEditFor(index) {
         setEditIndex(index)
         setIsModeEdit(true)
         setInputName(listName[index].name)
     }
-    
-    function deleteListname(index){
-        const prev = [...listName]
-        prev.splice(index, 1)
-        setListName(prev)
-    }
-
-    function actionListName(){
-        isModeEdit ? editListname() : addListName()
-    }
-
-    function onKeydownForm(e) {
-        if (e.key === 'Enter'){
-            actionListName()
+    function deleteListname(index) {
+        console.log(index)
+        if (window.confirm("Yakin hapus data?") === true) {
+            const prev = [...listName]
+            prev.splice(index, 1)
+            setListname(prev)
         }
     }
 
-    useEffect(() => {
-    console.log(listName)
-     })
-
     return (
-    <Container>
-        <Card>
-            <CardContent>
-                <Stack spacing={3}>
-                    <Typography variant="h4" align='center'>
-                        Daftar Nama
-                    </Typography>
-                    <Stack direction='row' spacing={3}>
-                        <TextField 
-                            variant='outlined' 
-                            placeholder="Nama baru" 
-                            size="small"
-                            value={inputName}
-                            onChange={(e) => setInputName(e.target.value)}
-                            oneKeyDown={onKeydownForm}
+        <div >
+            <Container sx={{ my: 18 }} align="center" >
+                <Card sx={{ maxWidth: 500 }} >
+                    <CardContent >
+                        <div><h3>List Nama</h3></div> <br />
 
-                       />
-                        <Button 
-                            variant='contained'
-                            onClick={() => actionListName()}
-                        >
-                            {isModeEdit ? 'Edit': 'Tambah'}
-                      </Button>
-                    </Stack>
-                    <List>
-                    {
-                        listName.map((item, index)=>(
-                            <ListItem
-                            key={index}
-                                secondaryAction={
-                                    <Stack direction="row" spacign={2}>
-                                      <IconButton edge="end" aria-label="edit" onClick={() => setModeEditFor(index)}>
-                                        <EditIcon />
-                                        </IconButton>
+                        <Stack direction='row' spacing={3}>
+                            <TextField
+                                variant="outlined"
+                                size="small"
+                                placeholder="Nama baru"
+                                value={inputName}
+                                onChange={(e) => setInputName(e.target.value)}
+                            />
+                            <Button
+                                variant="contained"
+                                onClick={() => isModeEdit ? editListname() : addListName()}
+                            >
+                                {isModeEdit ? 'Edit' : 'Tambah'}
+                            </Button>
+                            
+                            
+                        </Stack>
+                        <List style={{
+                            height: '200px',
+                            overflow: 'auto'
+                        }}>
+                            {
+                                listName.map((item, index) => (
+                                    <ListItem
+                                        key={index}
+                                        secondaryAction={
+                                            <Stack direction="row">
+                                                <IconButton edge="end" aria-label="edit" onClick={() => setModeEditFor(index)}>
+                                                    <EditIcon />
+                                                </IconButton>
+                                                <IconButton edge="end" aria-label="delete" onClick={() => deleteListname(index)}>
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </Stack>
+                                        }>
+                                         <ListItemText  primary={item.name}></ListItemText>
 
-                                       <IconButton edge="end" aria-label="delete" onClick={() => deleteListname(index)}>
-                                        <DeleteIcon />
-                                       </IconButton>
-                                     </Stack>
-                                 }
-                                >
-                                    <ListItemText
-                                        primary={
-                                            editIndex === index  && isModeEdit
-                                            ? <TextField value={inputName} size= 'small' onChange={(e) => setInputName(e.target.value)} oneKeyDown={onKeydownForm}  ></TextField> 
-                                            : item.name
-                                    }
-                                    />
-                            </ListItem>
-                        ))
-                    }
-                    </List>
-                    <Stack>
-                        <Typography variant="h6" align='center'>
+                                  
+                                    </ListItem>
+                                    
+                                ))
+                            }
+                        </List>
                         Total Nama : {listName.length}
-                        </Typography>
 
-                        <Typography variant="h8" align='center'>
-
-                        <AcakNama listItems={listName} align='center'/>
-                        </Typography>
-                    </Stack>
-                    
-                </Stack>
-            </CardContent>
-        </Card>
-    </Container>
+                    </CardContent>
+                </Card>
+                <AcakNama listItems={listName} />
+            </Container>
+        
+        </div>
+        
     )
- }
+}
