@@ -1,68 +1,92 @@
-import { Button, Stack  } from "@mui/material"
-import { useState } from "react";
+import { Button, Card, List, ListItem, Stack } from "@mui/material";
+import { Container } from "@mui/system";
+import React, { useState } from 'react';
 
-export function AcakNama(props){
+
+
+export default function AcakNama(props) {
     const { listItems } = props
     const [selectedItem, setSelectedItem] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     function getRndInteger(min, max) {
-        return Math.floor(Math.random() * (max - min) ) + min;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function getRandomName(){
-        console.log(listItems)
-        const total = listItems.length
-        const randomId = getRndInteger(0, total)
-        return listItems[randomId].name
-    } 
-    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !==index)
+ 
 
-    function randomItem(){
+     function getRandomName() {
+            const total = listItems.length
+            const randomId = getRndInteger(0, total)
+            return listItems[randomId].name
+        }   
+
+    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index)
+           
+     function randomItem() {
         setIsLoading(true)
         setTimeout(() => {
-            const listRandomNama = [
+            const listRandomName = [
                 getRandomName(),
                 getRandomName(),
                 getRandomName()
             ]
-
-            const dup = findDuplicates(listRandomNama)
             
-            if(dup.length > 0){
-                randomItem()
-            } else {
-                setSelectedItem(listRandomNama)
-                setIsLoading(false)
-            }
+          setSelectedItem(listRandomName)
 
+          const dup = findDuplicates(listRandomName)
+          if(dup.length > 0) {  
+            randomItem()
+          } else {
+            setSelectedItem(listRandomName)
             setIsLoading(false)
-        }, 100)
+          }
+            
+        },100)
     }
 
     return (
-        <div>
-            <Stack direction={'column'} alignItems='center' spacing={2} justifyContent='center'>
-                <Button 
-                variant='outlined' 
-                size='small' 
-                onClick={() => randomItem()}
-                disabled={isLoading}
-                
+        <Container sx={{ my: 28 }} align="center">
+            <Card sx={{ maxWidth: 500 }}>
+                <div><h3>Acak Nama</h3></div>
+                <Stack>
+                    <List>
+                    <ListItem>
+                        <Container>
+                            Presenter 1 : {selectedItem[0]}
+                            </Container>
+                        </ListItem>
+                    </List>
+                    <List>
+                    <ListItem>
+                        <Container>
+                            Presenter 2 : {selectedItem[1]}
+                            </Container>
+                        </ListItem>
+                    </List>
+                    <List>
+                    <ListItem>
+                        <Container>
+                            Moderator : {selectedItem[2]}
+                        </Container>
+                        </ListItem>
+                    </List>
+                </Stack>
+                <Button
+
+                    margin="3"
+                    variant='outlined'
+                    size='small'
+                    onClick={() => randomItem()}
+                    disabled={isLoading}
                 >
-                    {isLoading ? 'Loading ... ' : 'acak'}
+                    {isLoading ? 'Loading..' : 'Acak'}
                 </Button>
                 <div>
-                    Presenter 1 : {selectedItem[0]}
-                </div>
-                <div>
-                    Presenter 2 : {selectedItem[1]}
-                </div>
-                <div>
-                    Moderator : {selectedItem[2]}
-                </div>
-            </Stack>
-            
-        </div>
+                    
+                </div><br />
+
+            </Card>
+        </Container>
     )
 }
