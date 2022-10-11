@@ -4,45 +4,43 @@ import React, { useState } from 'react';
 
 
 
-export default function AcakNama(props) {
+export function AcakNama(props){
     const { listItems } = props
     const [selectedItem, setSelectedItem] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     function getRndInteger(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+        return Math.floor(Math.random() * (max - min) ) + min;
     }
 
- 
+    function getRandomName(){
+        console.log(listItems)
+        const total = listItems.length
+        const randomId = getRndInteger(0, total)
+        return listItems[randomId].name
+    } 
+    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !==index)
 
-     function getRandomName() {
-            const total = listItems.length
-            const randomId = getRndInteger(0, total)
-            return listItems[randomId].name
-        }   
-
-    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index)
-           
-     function randomItem() {
+    function randomItem(){
         setIsLoading(true)
         setTimeout(() => {
-            const listRandomName = [
+            const listRandomNama = [
                 getRandomName(),
                 getRandomName(),
                 getRandomName()
             ]
-            
-          setSelectedItem(listRandomName)
 
-          const dup = findDuplicates(listRandomName)
-          if(dup.length > 0) {  
-            randomItem()
-          } else {
-            setSelectedItem(listRandomName)
-            setIsLoading(false)
-          }
+            const dup = findDuplicates(listRandomNama)
             
-        },100)
+            if(dup.length > 0){
+                randomItem()
+            } else {
+                setSelectedItem(listRandomNama)
+                setIsLoading(false)
+            }
+
+            setIsLoading(false)
+        }, 100)
     }
 
     return (
